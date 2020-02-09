@@ -2,7 +2,6 @@
 
 body {
     font-family: 'Roboto Condensed', sans-serif;
-    background-color: rgb(209, 209, 209);
     font-size: 1.5em;
 }
 
@@ -13,16 +12,31 @@ body {
 .thumbnail {
     display: block;
     width: 150px;
-    height: auto;
+    height: 96px;
     margin-right: 5px;
-    border-radius: 8px;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    background-color: rgb(214, 214, 214);
+    color: rgb(230, 230, 230);
+    text-align: center;
 }
 
-.article {
-    margin-bottom: 15px;
+.articleBody {
+    height: 96px;
+    background-color: rgb(240, 239, 239);
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
 .date {
     font-size: 80%;
     color: rgb(184, 184, 184);
+}
+
+@media only screen and (max-width: 800px) {
+    .content {
+        display: none;
+    }
 }
