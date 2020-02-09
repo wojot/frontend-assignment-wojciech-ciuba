@@ -1,4 +1,7 @@
-# Schibsted frontend task app
+# Schibsted frontend task app by Wojciech Ciuba
+
+To run dev application:
+> `$ npm run start`
 
 This is a very basic npm project with default webpack setup.
 
