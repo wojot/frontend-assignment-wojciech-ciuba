@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { getArticles } from "./services/API";
+import Article from "./components/Article";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Button } from "reactstrap";
@@ -31,16 +32,18 @@ export default class App extends Component {
           </Col>
         </Row>
         <Row>
-          <Col sm="3">
+          <Col sm="2">
             {this.state.categories.map((categoryName, index) => (
               <div key={index}>
                 {this.getCategoryNameCapitalized(categoryName)}
               </div>
             ))}
           </Col>
-          <Col sm="9">
+          <Col sm="10">
             {this.state.articles.map((article, index) => (
-              <div key={index}>{article.id}</div>
+              <div key={index}>
+                <Article article={article} />
+              </div>
             ))}
           </Col>
         </Row>

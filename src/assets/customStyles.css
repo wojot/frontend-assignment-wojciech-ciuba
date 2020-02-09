@@ -1,8 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
+
 body {
+    font-family: 'Roboto Condensed', sans-serif;
     background-color: rgb(209, 209, 209);
     font-size: 1.5em;
 }
 
 .container {
     background-color: white;
+}
+
+.thumbnail {
+    display: block;
+    width: 150px;
+    height: auto;
+    margin-right: 5px;
+    border-radius: 8px;
+}
+
+.article {
+    margin-bottom: 15px;
+}
+
+.date {
+    font-size: 80%;
+    color: rgb(184, 184, 184);
 }
