@@ -1,33 +1,11 @@
-# Schibsted frontend task app by Wojciech Ciuba
+Articles list app. Technologies: React
 
 To run dev application:
 > `$ npm run start`
 
-This is a very basic npm project with default webpack setup.
+Application displays articles of chosen categories. Articles are fetched from API, where server status code 500 is handled. In case when API doesn't supply image, app displays defalt block. One or all categories can be selected.
 
-You should use this project as a base for your solution.
-Feel free to modify/extend this with whatever you need.
+Application could be improved by replacing standard state with Redux, but it's not implemented yet due to small size of app. Categories list can be simply extended, if API allows.
 
-In case you need some assistance take a look at official webpack docs:
- - [Guides](https://webpack.js.org/guides/) 
- - [Concepts](https://webpack.js.org/concepts/)
-
-Eventually this application will request live data from a real API.
-
-You can find the full description of your assignment in [ASSIGNMENT.md](ASSIGNMENT.md)
-
-## API Documentation
-Api server can be found in `server.js` file. You should not modify this file, only use it.
-
-To run the server do:
-> `$ node server.js`
-
-Server will start listening on port `6010`.
-
-The server has 2 endpoints:
-
-`/articles/sports` - returns a list of articles from `sport` category
-
-`/articles/fashion` - returns a list of articles from `fashion` category
-
-Be aware of backend errors!
+![Screen1](screen1.png)
+![Screen2](screen2.png)
