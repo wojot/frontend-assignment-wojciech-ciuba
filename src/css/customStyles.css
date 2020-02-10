@@ -6,7 +6,15 @@ body {
 }
 
 .container {
+    width: 100%;
     background-color: white;
+}
+
+.header {
+    background-color: #3abca7;
+    padding: 5px;
+    color: white;
+    margin-bottom: 10px;
 }
 
 .thumbnail {
@@ -33,6 +41,11 @@ body {
 .date {
     font-size: 80%;
     color: rgb(184, 184, 184);
+}
+
+.title {
+    color: #3abca7;
+
 }
 
 @media only screen and (max-width: 800px) {

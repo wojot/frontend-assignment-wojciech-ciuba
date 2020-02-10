@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { getArticles } from "./services/API";
 import Article from "./components/Article";
+import Header from "./components/Header";
+import Categories from "./components/Categories";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col, FormGroup, Label, Input } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import "./css/customStyles.css";
-import { GoTriangleUp, GoTriangleDown } from "react-icons/go";
 
 export default class App extends Component {
   state = {
@@ -16,7 +17,7 @@ export default class App extends Component {
     error: null
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.getArticlesOfSelectedCategories();
   }
 
@@ -120,39 +121,16 @@ export default class App extends Component {
   };
 
   render() {
+    // console.log(this.state);
     return (
-      <Container className="container" fluid>
+      <Container className="container" >
+        <Header toggleSorting={this.toggleSorting} />
         <Row>
-          <Col sm="12" xl="12" className="text-right">
-            <span onClick={this.toggleSorting}>
-              Sort by date:{" "}
-              {this.state.sortDesc === true ? (
-                <GoTriangleDown />
-              ) : (
-                <GoTriangleUp />
-              )}
-            </span>
-          </Col>
-        </Row>
-        <Row>
-          <Col sm="2">
-            Categories:{" "}
-            <FormGroup check inline={window.innerWidth <= 760 ? true : false}>
-              {this.state.categories.map((categoryName, index) => (
-                <div key={index}>
-                  <Label check>
-                    <Input
-                      type="checkbox"
-                      onChange={this.setCategory}
-                      value={index}
-                      checked={this.state.activeCategories.includes(index)}
-                    />
-                    {"  " + categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}
-                  </Label>
-                </div>
-              ))}
-            </FormGroup>
-          </Col>
+          <Categories
+            setCategory={this.setCategory}
+            activeCategories={this.state.activeCategories}
+            initialCategories={this.state.categories}
+          />
           <Col sm="10">
             {/* Error due to HTTP code 500, page reloaded. Can be resolved differently */}
             {this.state.error ? window.location.reload() : ""}

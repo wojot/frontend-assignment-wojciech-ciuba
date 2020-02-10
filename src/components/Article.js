@@ -11,7 +11,7 @@ export default function Article(props) {
       </Media>
       <Media body className="articleBody">
         <Media heading>
-          {title} <span className="date">{date}</span>
+          <span className="title">{title}</span> <span className="date">{date}</span>
         </Media>
         <span className="content"><small>{preamble}</small></span>
       </Media>
