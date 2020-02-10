@@ -11,6 +11,10 @@
   },
   "author": "Wojciech Ciuba",
   "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wojot/frontend-assignment-wojciech-ciuba"
+  },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",

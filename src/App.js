@@ -4,8 +4,7 @@ import Article from "./components/Article";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, FormGroup, Label, Input } from "reactstrap";
-import "./assets/customStyles.css";
-
+import "./css/customStyles.css";
 import { GoTriangleUp, GoTriangleDown } from "react-icons/go";
 
 export default class App extends Component {
@@ -17,22 +16,26 @@ export default class App extends Component {
     error: null
   };
 
-  componentDidMount() {
+  componentWillMount() {
     this.getArticlesOfSelectedCategories();
   }
 
   getArticlesOfSelectedCategories = () => {
-    this.clearErrors();
-    this.clearArticles();
+    this.setState({ error: null, articles: [] });
 
+    //iterate selected categories
     this.state.activeCategories.map(activeCat => {
       let activeCategoryName = this.state.categories[activeCat];
 
+      //get posts from iterated category
       getArticles(activeCategoryName).then(articles => {
         if (articles.message) {
           this.setState({ error: articles.message });
         } else {
           let articlesArr = [...this.state.articles, ...articles.articles];
+
+          //add timestamp field to each post object, could have been done while fetching from API
+          //it's because Moment and internal parsing date library don't recognize oktober
           articlesArr = articlesArr.map(article => {
             const dateSplitted = article.date.split(" ");
             const monthNum = [
@@ -48,7 +51,7 @@ export default class App extends Component {
               "oktober",
               "november",
               "desember"
-            ].indexOf(dateSplitted[1]); //Moment and internal parsing date library don't recognize oktober
+            ].indexOf(dateSplitted[1]);
 
             const date = new Date(
               dateSplitted[2],
@@ -61,44 +64,42 @@ export default class App extends Component {
               timeStamp: date
             };
           });
-          this.setState({
-            articles: articlesArr
-          });
+
+          this.setState(
+            {
+              articles: articlesArr
+            },
+            () => {
+              this.sortArticles();
+            }
+          );
         }
       });
     });
   };
 
-  sortArticlesAsc() {
-    this.setState(prevState => {
-      this.state.articles.sort((a, b) => b.timeStamp - a.timeStamp);
-    });
-  }
+  sortArticles() {
+    if (this.state.sortDesc === true) {
+      this.setState(prevState => {
+        this.state.articles.sort((a, b) => b.timeStamp - a.timeStamp);
+      });
+    } else {
+      this.setState(prevState => {
+        this.state.articles.sort((a, b) => a.timeStamp - b.timeStamp);
+      });
+    }
 
-  sortArticlesDesc() {
-    this.setState(prevState => {
-      this.state.articles.sort((a, b) => a.timeStamp - b.timeStamp);
-    });
+    this.forceUpdate();
   }
 
   toggleSorting = () => {
     this.setState({ sortDesc: !this.state.sortDesc }, () => {
-      this.state.sortDesc === true
-        ? this.sortArticlesDesc()
-        : this.sortArticlesAsc();
+      this.sortArticles();
     });
   };
 
   getCategoryNameCapitalized = categoryName => {
     return categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
-  };
-
-  clearErrors = () => {
-    this.setState({ error: null });
-  };
-
-  clearArticles = () => {
-    this.setState({ articles: [] });
   };
 
   setCategory = e => {
@@ -119,7 +120,6 @@ export default class App extends Component {
   };
 
   render() {
-    // console.log(this.state);
     return (
       <Container className="container" fluid>
         <Row>
@@ -147,7 +147,7 @@ export default class App extends Component {
                       value={index}
                       checked={this.state.activeCategories.includes(index)}
                     />
-                    {"  " + this.getCategoryNameCapitalized(categoryName)}
+                    {"  " + categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}
                   </Label>
                 </div>
               ))}
