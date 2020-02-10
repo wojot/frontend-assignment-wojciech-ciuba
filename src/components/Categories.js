@@ -7,14 +7,17 @@ export default function Categories({
   activeCategories
 }) {
   const [categories, setCategories] = useState(initialCategories);
-  
+  const mobile = window.innerWidth <= 760;
+  const inline = mobile ? true : false;
+  const labelStyle = mobile ? { "margin-left": "10px" } : {};
+
   return (
     <Col sm="2">
       Categories:{" "}
-      <FormGroup check inline={window.innerWidth <= 760 ? true : false}>
+      <FormGroup check inline={inline}>
         {categories.map((categoryName, index) => (
           <div key={index}>
-            <Label check>
+            <Label check style={labelStyle}>
               <Input
                 type="checkbox"
                 onChange={setCategory}
