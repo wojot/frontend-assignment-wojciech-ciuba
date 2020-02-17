@@ -14,10 +14,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.html$/i,
-        loader: "html-loader"
-      },
-      {
         test: /\.js$/,
         exclude: path.resolve(__dirname, "node_modules/"),
         use: {

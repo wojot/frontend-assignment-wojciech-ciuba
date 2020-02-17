@@ -123,8 +123,11 @@ export default class App extends Component {
   render() {
     // console.log(this.state);
     return (
-      <Container className="container" >
-        <Header toggleSorting={this.toggleSorting} />
+      <Container className="container">
+        <Header
+          toggleSorting={this.toggleSorting}
+          sortDesc={this.state.sortDesc}
+        />
         <Row>
           <Categories
             setCategory={this.setCategory}
@@ -139,7 +142,7 @@ export default class App extends Component {
               ? "Select at least one category!"
               : ""}
             {this.state.articles.map((article, index) => (
-              <div key={index}>
+              <div key={article.id}>
                 <Article article={article} />
               </div>
             ))}

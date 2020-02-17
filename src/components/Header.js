@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { GoTriangleUp, GoTriangleDown } from "react-icons/go";
 import { Row, Col } from "reactstrap";
 
-export default function Header({ toggleSorting }) {
-  const [sortDesc, setSortDesc] = useState(true);
-
+export default function Header({ toggleSorting, sortDesc }) {
   return (
     <Row className="header">
       <Col sm="10" xl="10" className="text-center">
